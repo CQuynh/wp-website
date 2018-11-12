@@ -1,0 +1,1047 @@
+//
+// Atum List Tables
+//------------------
+
+.wrap {
+	
+	h1.wp-heading-inline {
+		line-height: 1.5;
+		position: relative;
+		
+		#atum-update-list {
+			margin-left: 5px;
+			border-radius: 0;
+			vertical-align: middle;
+			
+			&:active {
+				color: $white;
+				padding: 0 10px 1px;
+				box-shadow: 0 1px 0 $wp-link;
+			}
+		}
+		
+		// At 782px, WordPress changes the list table views to mobile version
+		@media all and (max-width: 782px) {
+			@include flexbox;
+			@include flex-wrap(wrap);
+			@include flex-justify-content(center);
+			
+			a, button {
+				width: 100%;
+				text-align: center;
+				padding: 7px 15px;
+				margin-top: 5px;
+				height: auto;
+				line-height: 1.3;
+			}
+		}
+	}
+	
+}
+
+.atum-list-wrapper {
+	padding-top: 2px;
+	padding-bottom: 20px;
+	width: 100%;
+	overflow: hidden;
+	
+	a {
+		&:focus {
+			box-shadow: none;
+		}
+	}
+	
+	.search-box {
+		@include flexbox;
+		display: inline-block;
+		float: right;
+		margin-right: 3px;
+		margin-bottom: 3px;
+
+		#search_column_btn{
+			@if $enable-rounded {
+				border-top-right-radius : $border-radius;
+				border-bottom-right-radius: $border-radius;
+			} @else {
+				border-radius: 0;
+			}
+			border-color: $gray-400;
+		}
+
+		.atum-post-search {
+			margin-right: 0;
+		}
+		
+		.input-group-append {
+			border: none;
+		}
+		
+		.dropdown-toggle {
+			&:after {
+				vertical-align: middle;
+			}
+		}
+
+		.dropdown-menu{
+			margin-top: 0px;
+			right: 0px;
+			
+		}
+
+		.dropdown-item{
+			width: auto;
+		}
+
+	}
+	
+	.search-submit {
+		margin-left: 4px;
+	}
+	
+	.tablenav-pages, .search-box {
+		position: relative;
+	}
+	
+	.subsubsub {
+		position: relative;
+		margin-left: 3px;
+		margin-top: 0;
+		
+		a {
+			&.current, &.empty {
+				pointer-events: none;
+				color: $black;
+				
+			}
+		}
+		
+		.reset-filters {
+			border-radius: 50%;
+			width: 25px;
+			height: 25px;
+			text-align: center;
+			border: none;
+			background-color: $primary;
+			color: $white;
+			padding: 2px 0 0;
+			cursor: pointer;
+			position: relative;
+			@include transition(0.2s ease-in-out);
+			
+			&:focus {
+				outline: none;
+			}
+			
+			&:hover {
+				background-color: darken($primary, 5%);
+			}
+			
+			i {
+				font-size: 18px;
+			}
+		}
+	}
+	
+	.actions {
+		
+		&.bulkactions {
+			padding-right: 0;
+			
+			select {
+				max-width: 150px;
+			}
+		}
+		
+		input, select, .select2-container {
+			height: 32px;
+			margin-bottom: 4px;
+			margin-right: 2px;
+			float: left;
+		}
+		
+		.select2-container {
+			margin-top: 1px;
+			margin-right: 2px;
+			font-size: 14px;
+			
+			&, * {
+				&:focus {
+					outline: none;
+				}
+			}
+			
+			&:focus {
+				.select2-selection {
+					box-shadow: 0 0 2px rgba($input-focus, .8);
+					border-color: $input-focus;
+				}
+			}
+			
+			.select2-selection__placeholder {
+				color: $dark !important;
+			}
+			
+			.select2-selection__arrow {
+				b {
+					border-top-color: $dark;
+				}
+			}
+		}
+		
+		
+		.filter-text {
+			display: inline;
+			float: left;
+			line-height: 28px;
+			padding-right: 10px;
+		}
+		
+		.dropdown_extra_filter {
+			max-width: 160px;
+		}
+		
+	}
+	
+	@media screen and (max-width: 782px) {
+		
+		ul.subsubsub {
+			font-size: 14px;
+			float: none;
+		}
+		
+		.search-box {
+			@include flexbox;
+			float: none;
+			margin: auto;
+			width: 90%;
+			
+			input[type="text"], input[type="number"], button {
+				height: 36px;
+			}
+		}
+		
+		.actions.bulkactions {
+			display: block;
+			text-align: center;
+			float: none;
+			
+			select {
+				width: 90%;
+				max-width: 90%;
+				float: none;
+				display: block;
+				margin: auto;
+			}
+		}
+		
+		.tablenav.top {
+			.bulkactions {
+				margin-bottom: $grid-gutter-width/2;
+			}
+		}
+		
+	}
+	
+}
+
+// WC's Enhanced Select fix
+.select2-dropdown {
+	.select2-results__option {
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+.atum-table-wrapper {
+	clear: both;
+	
+	// JScrollpane
+	.jspContainer {
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.jspPane {
+		position: absolute;
+	}
+	
+	.jspVerticalBar, .jspCap, .jspArrow {
+		display: none;
+	}
+	
+	.jspHorizontalBar {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 16px;
+		
+		.jspCap {
+			float: left;
+		}
+		
+		.jspTrack, .jspDrag {
+			float: left;
+			height: 100%;
+		}
+		
+		.jspArrow {
+			width: 16px;
+			float: left;
+			height: 100%;
+		}
+	}
+	
+	.jspTrack {
+		background: rgba($secondary, 0.2);
+		position: relative;
+	}
+	
+	.jspDrag {
+		background: $secondary;
+		position: relative;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+	}
+	
+	.jspCorner {
+		background: $light;
+		float: left;
+		height: 100%;
+	}
+	
+}
+
+.atum-list-table {
+	
+	// Fixed columns
+	&.cloned {
+		width: auto;
+		position: absolute;
+		bottom: 0;
+		margin-bottom: 0;
+		border-right: none;
+		box-shadow: rgba($black, 0.04) 5px 1px 10px;
+		
+		@media all and (max-width: 600px) {
+			display: none !important;
+		}
+	}
+	
+	&:not(.floatThead-table) {
+		table-layout: auto !important; // FloatTHead fix
+	}
+}
+
+.atum-list-table, .floatThead-container {
+	margin-bottom: 15px;
+	border-collapse: collapse;
+	
+	thead .item-heads, tfoot {
+		background-color: $white;
+		
+		th {
+			padding: 3px 5px;
+			line-height: 1.1;
+			font-size: 13px;
+			min-width: 50px;
+			height: 42px;
+			
+			.dashicons {
+				display: block;
+				text-indent: -9999px;
+				position: relative;
+				height: 1em;
+				width: 1em;
+				margin: 0 auto;
+				font-size: 14px;
+				
+				&:before {
+					text-indent: 0;
+					position: absolute;
+					left: 0;
+					top: 0;
+				}
+			}
+			
+			svg {
+				max-height: 14px;
+			}
+			
+		}
+	}
+	
+	.column-groups {
+		background-color: darken($light, 7%);
+		
+		th {
+			padding: 6px 10px;
+			font-weight: 500;
+			font-size: 12px;
+			line-height: 1.3;
+			min-width: 80px;
+			height: 20px;
+			
+			&:not(:last-child) {
+				border-right: 1px solid $gray-400;
+			}
+			
+			.group-toggler {
+				float: right;
+				font-size: 16px;
+				cursor: pointer;
+				font-family: 'Linearicons';
+				
+				&:before {
+					content: "\e889";
+				}
+				
+				&:hover {
+					color: $wp-link-hover;
+				}
+				
+			}
+			
+			&.collapsed {
+				min-width: 0;
+				width: 37px;
+				
+				.group-toggler {
+					@include transform(rotate(180deg));
+				}
+			}
+			
+		}
+	}
+	
+	th {
+		&.sortable, &.sorted {
+			a {
+				padding: 0;
+				@include flexbox;
+			}
+			
+			&[class*="column-calc_"], &.column-_stock, &.column-_regular_price, &.column-_sale_price,
+			&.column-_purchase_price, &.column-ID, &.column-_weight, &.column-_out_stock_threshold {
+				a {
+					@include flex-justify-content(center);
+					@include flex-align-items(center);
+					
+					> span {
+						float: none;
+						
+						&:first-child {
+							padding-left: 10px;
+						}
+					}
+				}
+				
+			}
+			
+			.sorting-indicator {
+				display: inline-block;
+				width: auto;
+			}
+		}
+		
+		&.column-_supplier_sku {
+			white-space: nowrap;
+			max-width: 71px;
+		}
+		
+		&.check-column {
+			input[type=checkbox] {
+				@include vertical-align-absolute;
+			}
+		}
+	}
+	
+	tr {
+		
+		&.even {
+			background-color: $light;
+		}
+		
+		&.expanded {
+			@include transition(all 0.1s ease-in-out);
+			
+			&.variable, &.variable-subscription {
+				background-color: $primary;
+			}
+			
+			&.group {
+				background-color: $warning;
+			}
+			
+			&.variable, &.variable-subscription, &.group {
+				
+				td, a {
+					color: $white;
+				}
+				
+				.column-calc_type {
+					
+					.has-child {
+						
+						&.product-type {
+							&:before {
+								content: "\e004";
+								color: $white;
+							}
+						}
+						
+						&.product-type-icon {
+							svg {
+								.st1 {
+									fill: $white;
+								}
+							}
+						}
+						
+					}
+				}
+				
+			}
+		}
+		
+		&.expandable {
+			.check-column {
+				input[type=checkbox] {
+					margin-left: 20px;
+				}
+			}
+		}
+		
+		&.variation {
+			background-color: $blue-light;
+			
+			&:nth-child(even) {
+				background-color: $blue-light-2;
+			}
+			
+			td.title {
+				.child-arrow {
+					color: $blue;
+				}
+			}
+		}
+		
+		&.grouped {
+			background-color: $orange-light;
+			
+			&:nth-child(even) {
+				background-color: $orange-light-2;
+			}
+			
+			td.title {
+				.child-arrow {
+					color: $orange;
+				}
+			}
+		}
+		
+		&.no-items {
+			td {
+				padding: 10px 24px;
+				
+				.alert {
+					margin-top: $grid-gutter-width/2;
+					@include flex-wrap(wrap);
+					
+					h3, p {
+						width: 100%;
+					}
+					
+					h3 {
+						margin-bottom: $grid-gutter-width/2;
+					}
+					
+					i {
+						margin-right: 0;
+						font-size: 24px;
+						width: 24px;
+						height: 24px;
+						line-height: 0.8;
+					}
+					
+					p {
+						font-weight: bold;
+						padding-left: 10px;
+						margin-bottom: 0;
+					}
+					
+					button {
+						display: inline-block;
+						vertical-align: middle;
+						margin-top: 10px;
+					}
+					
+					.atum-spinner {
+						display: inline-block;
+						vertical-align: 8px;
+						margin-left: 10px;
+						
+						span {
+							@include loader($color: $secondary);
+						}
+					}
+					
+				}
+			}
+		}
+		
+		&.totals {
+			background-color: darken($light, 7%);
+			
+			td, th {
+				font-size: 12px;
+				font-weight: 400;
+				color: $dark;
+				padding-top: 0;
+				padding-bottom: 0;
+				
+				span {
+					display: inline-block;
+					background-color: $blue-dark;
+					color: $white;
+					border-radius: 2px;
+					padding: 2px 4px;
+					min-width: 20px;
+					
+					&.danger {
+						background-color: $danger;
+					}
+				}
+			}
+		}
+		
+	}
+	
+	.cell {
+		&-green {
+			color: $success;
+		}
+		
+		&-yellow {
+			color: $warning !important;
+			.set-meta {
+				color: $warning !important;
+			}
+		}
+
+		&-red {
+			color: $danger !important;
+			.set-meta {
+				color: $danger !important;
+			}
+		}
+		
+		&-blue {
+			color: $primary;
+		}
+	}
+	
+	td, th {
+		position: relative;
+		vertical-align: middle;
+		padding: 6px 5px;
+		
+		&.pro-version {
+			background-color: $secondary;
+		}
+		
+		&.column-title {
+			min-width: 150px;
+			
+			> span {
+				white-space: nowrap;
+			}
+			
+			.child-arrow {
+				display: inline-block;
+				margin-right: 2px;
+				margin-left: 5px;
+				font-weight: bold;
+				font-size: 14px;
+				@include transform(rotate(90deg));
+			}
+		}
+		
+		&.column-sku {
+			min-width: 70px;
+		}
+		
+		&[class*="column-calc_"], &.column-_stock, &.column-_regular_price, &.column-_sale_price,
+		&.column-_purchase_price, &.column-ID, &.column-_weight, &.column-_out_stock_threshold {
+			text-align: center;
+		}
+		
+		a {
+			cursor: pointer;
+		}
+		
+		&.ghost-column {
+			width: 37px;
+			padding: 0 !important;
+			min-width: 0 !important;
+			height: auto !important;
+			border-left: 1px solid $gray-200;
+			border-right: 1px solid $gray-200;
+		}
+		
+	}
+	
+	td {
+		&.column-title {
+			font-weight: 500;
+		}
+	}
+	
+	.column-thumb {
+		height: 40px;
+	}
+	
+	.column-calc_type {
+		max-width: 50px;
+		text-align: center;
+		
+		.wc-type {
+			display: block;
+			text-indent: -9999px;
+			position: relative;
+			height: 1em;
+			width: 1em;
+			margin: 0 auto;
+			
+			&:before {
+				font-family: WooCommerce;
+				content: "\e006";
+				position: absolute;
+				text-indent: 0;
+				font-size: 14px;
+				top: 0;
+				speak: none;
+				font-variant: normal;
+				text-transform: none;
+				-webkit-font-smoothing: antialiased;
+				left: 0;
+			}
+		}
+		
+		.product-type {
+			display: block;
+			text-indent: -9999px;
+			position: relative;
+			height: 1em;
+			width: 1em;
+			font-size: 1.6em;
+			margin: 0 auto;
+			-moz-osx-font-smoothing: grayscale;
+			
+			&:before {
+				font-family: WooCommerce;
+				speak: none;
+				font-weight: 400;
+				text-transform: none;
+				line-height: 1;
+				text-indent: 0px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				content: "\e006";
+				font-variant: normal;
+				margin: 0;
+			}
+			
+			&.grouped:before {
+				content: "\e002";
+			}
+			
+			&.external::before {
+				content: "\e034";
+			}
+			
+			&.variable::before {
+				content: "\e003";
+			}
+			
+			&.downloadable::before {
+				content: "\e001";
+			}
+			
+			&.virtual::before {
+				content: "\e000";
+			}
+			
+		}
+		
+		.has-child {
+			cursor: pointer;
+			
+			&.product-type {
+				
+				&.variable, &.variable-subscription {
+					color: $primary;
+				}
+				
+				&.variable-subscription {
+					&:before {
+						content: "\e003";
+					}
+				}
+				
+				&.grouped {
+					color: $warning;
+				}
+				
+				&:hover {
+					&:before {
+						content: "\e005";
+					}
+				}
+				
+			}
+			
+		}
+		
+		.variation, .grouped-item {
+			&:before {
+				content: "\e039";
+			}
+		}
+		
+		.product-part, .raw-material {
+			display: block;
+			padding-top: 6px;
+		}
+	}
+
+	.show-locations{
+		cursor: pointer;
+		color: $wp-gray-2;
+		
+		&.not-empty {
+			color: $link-color;
+		}
+	}
+	
+	.set-meta {
+		cursor: pointer;
+		color: $link-color;
+		
+		&:hover {
+			color: $link-hover-color;
+		}
+		
+		&.unsaved {
+			color: $danger;
+		}
+	}
+
+	.set-header {
+		cursor: pointer;
+		color: $link-color;
+
+		&:hover {
+			color: $link-hover-color;
+		}
+	}
+	
+	.highlight-danger {
+		background-color: $danger;
+		color: $white;
+		padding: 2px 3px;
+		border-radius: 2px;
+	}
+	
+	#calc_stock_out_days {
+		min-width: 56px;
+	}
+	
+	.column-calc_stock_indicator {
+		.dashicons {
+			font-size: 1.4em !important;
+		}
+	}
+	
+	.atum-title-small {
+		display: none;
+	}
+	
+	@media screen and (max-width: 782px) {
+		
+		th, td {
+			display: table-cell !important;
+			padding: 6px 5px !important;
+			
+			&.check-column {
+				input[type="checkbox"] {
+					width: 18px;
+					height: 18px;
+					
+					&:before {
+						margin: -5px -8px;
+					}
+				}
+			}
+		}
+		
+		th {
+			&.column-primary {
+				width: auto !important;
+			}
+		}
+		
+		tr:not(.inline-edit-row):not(.no-items) td:not(.column-primary)::before {
+			content: none;
+		}
+		
+		.column-primary {
+			.toggle-row {
+				display: none;
+			}
+		}
+		
+	}
+	
+}
+
+// Float Thead
+.floatThead-wrapper {
+	tr.size-row {
+		display: none;
+	}
+	
+	.floatThead-container {
+		height: 0;
+		overflow-y: hidden;
+		margin-bottom: 0;
+		
+		// Avoid issues when toggling columns while the header is floating
+		.group-toggler {
+			display: none;
+		}
+	}
+}
+
+// Manage Stock notice
+.atum-notice {
+	@include flexbox;
+	@include flex-align-items(center);
+	
+	.manage-message {
+		position: relative;
+		@include flex-grow(1);
+	}
+	
+	.notice-dismiss {
+		top: 50%;
+		@include transform(translateY(-50%));
+	}
+	
+	.add-manage-option {
+		margin-top: 3px;
+	}
+}
+
+// Help Tabs
+.contextual-help-tabs-wrap {
+	padding: 20px;
+	
+	table {
+		tr {
+			td {
+				&:first-child {
+					width: 20%;
+				}
+			}
+		}
+	}
+	
+	.dashicons-format-image {
+		font-size: 18px;
+	}
+	
+	.wc-type {
+		&:before {
+			font-family: WooCommerce;
+			content: "\e006";
+			font-size: 18px;
+			top: 0;
+			speak: none;
+			font-variant: normal;
+			text-transform: none;
+			-webkit-font-smoothing: antialiased;
+			left: 0;
+		}
+	}
+	
+}
+
+// Popovers' customisations
+.popover {
+	
+	// Inner content for "Set Field" popovers
+	.popover-content {
+		
+		.atum-list-table & {
+			text-align: center;
+		}
+		
+		> input[type=number], > input[type=text], > .button {
+			display: inline-block;
+			vertical-align: middle;
+			height: 30px;
+			font-size: 14px;
+		}
+		
+		> input[type=number], > input[type=text] {
+			width: 75%;
+			text-align: center;
+			border-radius: 3px;
+		}
+		
+		> .button {
+			margin-left: 3px;
+			
+			&:disabled {
+				color: $light !important;
+				opacity: 0.6;
+			}
+		}
+		
+		@media all and (max-width: $screen-sm) {
+			> input[type=number], > input[type=text], > .button {
+				width: 100%;
+			}
+			
+			> .button {
+				margin-left: 0;
+				margin-top: 5px;
+			}
+		}
+		
+	}
+	
+	// Popover with extra meta fields
+	&.with-meta {
+		
+		.popover-content {
+			input, button {
+				width: 100%;
+				margin: 3px 0;
+			}
+			
+			hr {
+				border-color: $info;
+			}
+		}
+		
+	}
+	
+}

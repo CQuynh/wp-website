@@ -1,0 +1,25 @@
+{
+	"name": "ATUM",
+	"version": "1.4.16",
+	"author": "Be Rebel - https://berebel.io",
+	"homepage": "https://www.stockmanagementlabs.com",
+	"private": true,
+	"repository": {
+		"type": "git"
+	},
+	"license": "Copyrighted",
+	"devDependencies": {
+		"gulp": "latest",
+		"gulp-composer": "latest",
+		"gulp-filter": "latest",
+		"gulp-if": "latest",
+		"gulp-livereload": "latest",
+		"gulp-notify": "latest",
+		"gulp-plumber": "latest",
+		"gulp-sass": "latest",
+		"gulp-sourcemaps": "latest",
+		"gulp-watch": "latest",
+		"gulp-wrap": "latest",
+		"hoek": "^4.2.1"
+	}
+}

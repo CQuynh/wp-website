@@ -1,0 +1,427 @@
+//
+// Atum Settings
+//---------------
+
+$settings-menu-bg:          $dark;
+$settings-menu-color:       $gray-500;
+$settings-menu-active:      $white;
+
+
+// Settings Menu
+.atum-settings-wrapper {
+	
+	h1 {
+		text-transform: uppercase;
+		margin-bottom: $grid-gutter-width/2;
+		font-weight: 500;
+	}
+	
+	.atum-nav {
+		border: none;
+		background-color: $settings-menu-bg;
+		border-radius: 6px;
+		padding: 4px $grid-gutter-width/2;
+		@include flexbox;
+		@include flex-align-items(center);
+	}
+	
+	.atum-brand {
+		margin: 0 1em 0 0.25em;
+		
+		&:focus {
+			box-shadow: none;
+		}
+		
+		img {
+			position: relative;
+			top: 3px;
+			min-width: 25px;
+		}
+	}
+	
+	.atum-nav-list {
+		position: relative;
+		@include flexbox;
+		@include flex-wrap(wrap);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	.atum-nav-item {
+		display: block;
+		margin: 1em 0;
+	}
+	
+	.atum-nav-link {
+		text-transform: uppercase;
+		font-size: 13px;
+		font-weight: 300;
+		text-decoration: none;
+		display: block;
+		padding: 0 1em;
+		cursor: pointer;
+		@include user-select(none);
+		-webkit-touch-callout: none;
+		-webkit-tap-highlight-color: rgba($black, 0);
+		position: relative;
+		overflow: hidden;
+		text-align: center;
+		color: $settings-menu-color;
+		@include transition(color 0.3s);
+		
+		&:hover, &:focus {
+			outline: none;
+			color: $settings-menu-active;
+			box-shadow: none;
+		}
+		
+		.menu-helper {
+			padding-top: 0.45em;
+			padding-bottom: 0.5em;
+			display: block;
+			pointer-events: none;
+			
+			&:before, &:after {
+				content: '';
+				position: absolute;
+				left: 0;
+				width: 100%;
+				height: 1px;
+				opacity: 0;
+				background: $settings-menu-active;
+				@include transform(translate3d(0, -3em, 0));
+				@include transition(transform 0s 0.3s, opacity 0.2s);
+			}
+			
+			&:before {
+				top: 0;
+			}
+			
+			&:after {
+				bottom: 0;
+			}
+			
+		}
+		
+		&.active {
+			color: $settings-menu-active;
+			cursor: default;
+			
+			.menu-helper {
+				@include animation(anim-atum-menu 0.3s forwards);
+				
+				&:before, &:after {
+					opacity: 1;
+					@include transform(translate3d(0, 0, 0));
+					@include transition(transform 0.3s, opacity 0.1s);
+					@include transition-timing(cubic-bezier(0.4, 0, 0.2, 1));
+				}
+			}
+		}
+		
+	}
+
+}
+
+@include keyframes('anim-atum-menu') {
+	50% {
+		opacity: 0;
+		#{$browser}transform: translate3d(0, 100%, 0);
+	}
+	
+	51% {
+		opacity: 0;
+		#{$browser}transform: translate3d(0, -100%, 0);
+	}
+	
+	100% {
+		opacity: 1;
+		#{$browser}transform: translate3d(0, 0, 0);
+	}
+}
+
+// Settings form
+#atum-settings {
+	margin-top: $grid-gutter-width/1.5;
+	
+	.form-settings-wrapper {
+		position: relative;
+		
+		&.overlay {
+			
+			&:before {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				border-radius: 6px;
+				z-index: 10;
+				background-color: transparentize($black, 0.45);
+			}
+			
+			&:after {
+				content: '';
+				top: 45%;
+				left: 0;
+				right: 0;
+				margin: auto;
+				@include loader(50px, $info, 3px);
+			}
+		}
+	}
+	
+	.settings-section {
+		background-color: $white;
+		border-radius: 6px;
+		margin-bottom: $grid-gutter-width/1.5;
+		
+		&#atum_setting_shipping {
+			display: none;
+		}
+	}
+	
+	.section-title {
+		padding: $grid-gutter-width/1.5 $grid-gutter-width;
+		border-bottom: 2px solid darken($light, 5%);
+		
+		h2 {
+			color: $dark;
+			margin: 0;
+			text-transform: uppercase;
+			font-size: 14px;
+		}
+	}
+	
+	.section-fields {
+		padding: 0 $grid-gutter-width;
+		
+		tr {
+			&:not(:last-child) {
+				border-bottom: 1px solid darken($light, 5%);
+			}
+		}
+		
+		th, td {
+			padding-top: $grid-gutter-width;
+		}
+		
+		th {
+			width: 25%;
+			color: $dark;
+			font-weight: 400;
+			
+			.label {
+				background-color: $dark;
+				color: $white;
+				font-size: 10px;
+				font-weight: 500;
+				display: inline-block;
+				border-radius: 4px;
+				padding: 3px 7px;
+				margin-top: 5px;
+				text-transform: uppercase;
+			}
+		}
+		
+		.atum-setting-info {
+			color: $gray-500;
+			font-style: italic;
+			font-size: 13px;
+			font-weight: 100;
+			margin-bottom: $grid-gutter-width/2;
+			padding-top: 10px;
+			
+			ul {
+				padding-left: $grid-gutter-width/2;
+				
+				li {
+					list-style: circle;
+					line-height: 1.1;
+				}
+			}
+		}
+		
+		input[type=text], input[type=number], select, textarea {
+			padding: 6px;
+			margin: 0;
+			border-radius: 4px;
+			height: auto;
+		}
+		
+		input[type=text], input[type=number] {
+			height: 32px;
+		}
+		
+		input[type=number] {
+			width: 60px;
+		}
+		
+		.script-runner {
+			@include flexbox;
+			@include flex-wrap(wrap);
+			
+			.select2-container {
+				
+				&, .selection, .select2-selection--single, .select2-selection__rendered {
+					&:focus {
+						outline: none;
+					}
+				}
+				
+				.select2-selection--multiple {
+					border-radius: 4px;
+					line-height: 1;
+					margin-top: 2px;
+					
+					.select2-search.select2-search--inline {
+						margin: 0;
+						height: 28px;
+						
+						.select2-search__field {
+							min-height: 28px;
+							@include placeholder($wp-gray-1);
+						}
+					}
+				}
+				
+				&.select2-container--focus {
+					.select2-selection--multiple {
+						border-color: $wp-gray-4;
+					}
+				}
+				
+			}
+			
+			.tool-fields-wrapper {
+				width: 100%;
+				margin-bottom: $grid-gutter-width/2;
+				background-color: $light;
+				padding: $grid-gutter-width/2;
+				
+				.repeatable-row {
+					@include flexbox;
+					@include flex-align-items(center);
+					margin: 10px 0;
+					
+					> div {
+						margin-right: 10px;
+					}
+					
+					i {
+						cursor: pointer;
+						@include transition(0.2s ease-in-out);
+						
+						&:hover {
+							color: $primary;
+						}
+						
+						&.remove-row {
+							&:hover {
+								color: $danger;
+							}
+						}
+					}
+				}
+				
+				.error-message {
+					display: block;
+					color: $danger;
+					margin-top: $grid-gutter-width/2;
+					font-weight: normal;
+					font-size: 12px;
+				}
+				
+			}
+			
+			button {
+				border-radius: 4px;
+			}
+		}
+		
+	}
+	
+	.submit {
+		padding-top: 0;
+	}
+	
+	input[type=submit] {
+		text-transform: uppercase;
+		padding: 11px 20px 9px;
+		line-height: 1;
+		height: auto;
+		background: $primary;
+		text-shadow: none;
+		box-shadow: none;
+		border: none;
+		@include transition(all 0.2s ease-in-out);
+		
+		&:hover, &:active {
+			background-color: lighten($primary, 10%);
+			border-color: lighten($primary, 10%);
+			@include transform(none);
+		}
+		
+	}
+	
+	// Color Pickers
+	.wp-picker-container {
+		
+		button.wp-color-result {
+			height: 31px;
+			box-shadow: none;
+			
+			.wp-color-result-text {
+				line-height: 29px;
+			}
+		}
+		
+		.wp-picker-clear {
+			background-color: $secondary;
+			color: $white;
+			border: none;
+			height: 31px;
+			line-height: 31px;
+			
+			&:hover {
+				background-color: rgba($secondary, .8);
+			}
+		}
+	}
+	
+}
+
+// Sweet alert customizations
+.swal2-container {
+	z-index: 100000;
+	
+	.swal2-content, .swal2-title {
+		margin-bottom: $grid-gutter-width;
+	}
+	
+	.swal2-title {
+		line-height: 1.3;
+		font-size: 23px;
+	}
+	
+	p {
+		font-size: 15px;
+		text-align: center;
+	}
+	
+	button {
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+.select2-results {
+	.select2-results__option {
+		&:focus {
+			outline: none;
+		}
+	}
+}

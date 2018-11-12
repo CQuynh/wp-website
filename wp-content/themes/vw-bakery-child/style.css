@@ -1,0 +1,20 @@
+/*
+Theme Name: VW Bakery Child Theme
+Theme URI: https://www.vwthemes.com/themes/free-bakery-wordpress-theme-childtheme/
+Author: group
+Author URI: https://www.vwthemes.com/
+Description: This is child theme of VW Bakery 
+Version:  0.1
+Template: vw-bakery
+*/
+
+.home-page-header {
+	height: 208px;
+	padding-bottom: 0;
+}
+span.hi_normal:after {
+    content: "Cart";
+    font-size: 11px;
+}
+
+.fas.fa-shopping-cart { display: none;}
